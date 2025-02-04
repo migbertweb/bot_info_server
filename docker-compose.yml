@@ -1,0 +1,12 @@
+---
+services:
+  gestionvps-bot:
+    build: .
+    container_name: gestionvps-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - CHAT_ID=${CHAT_ID}
+    volumes:
+      - ./logs:/logs # Mapear la carpeta de logs
+      - ./scripts:/scripts # Mapear los scripts
