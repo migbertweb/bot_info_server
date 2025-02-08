@@ -4,6 +4,8 @@ services:
     build: .
     container_name: gestionvps-bot
     restart: unless-stopped
+    env_file:
+      - .env # Carga las variables desde el .env local
     environment:
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
       - CHAT_ID=${CHAT_ID}

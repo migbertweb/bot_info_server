@@ -26,7 +26,7 @@ WORKDIR /app
 # Copiar scripts y código
 COPY scripts /scripts
 COPY bot.py /app/bot.py
-COPY .env /app/.env
+# COPY .env /app/.env
 
 # Hacer ejecutables los scripts
 RUN chmod +x /scripts/*.sh
