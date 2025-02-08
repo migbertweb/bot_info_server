@@ -14,8 +14,8 @@ network_rx_mb=$(echo "scale=2; $network_rx / 1024 / 1024" | bc)
 network_tx_mb=$(echo "scale=2; $network_tx / 1024 / 1024" | bc)
 cpu_temp=$(sensors | awk '/Package id 0:/ {print $4}' | sed 's/+//g')
 processes=$(ps aux | wc -l)
-kernel_version=$(uname -r)
+kernel_version=$(uname -rn)
 # Obtener los últimos 5 procesos con mayor uso de CPU
 top_processes=$(ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head -n 6 | awk '{print $1, $2, $3, $4"%", $5"%"}')
 # Crear mensaje
-echo -e "🖥️ **Estado del Sistema**\n- CPU: $cpu_usage%\n- Memoria: $mem_usage\n- Versión del kernel: $kernel_version\n- Disco: $disk_usage\n- Carga del sistema: $load_avg\n- Uptime: $uptime\n- Usuarios conectados: $users_connected\n- Red: RX $network_rx_mb MB / TX $network_tx_mb MB\n- Temperatura CPU: $cpu_temp\n- Procesos en ejecución: $processes\n- $top_processes"
+echo -e "🖥️ **Estado del Sistema**\n- CPU: $cpu_usage%\n- Memoria: $mem_usage\n- Versión del kernel: $kernel_version\n- Disco: $disk_usage\n- Carga del sistema: $load_avg\n- Uptime: $uptime\n- Usuarios conectados: $users_connected\n- Red: RX $network_rx_mb MB / TX $network_tx_mb MB\n- Temperatura CPU: $cpu_temp\n- Procesos en ejecución: $processes\n\n- $top_processes"
