@@ -1,4 +1,26 @@
 #!/bin/sh
+#
+# Archivo: logs.sh
+#
+# Descripción: Script que busca y muestra las últimas 5 líneas de todos los archivos
+# .log encontrados en el directorio /logs. Ordena los archivos por fecha de modificación
+# y formatea la salida para su visualización en Telegram.
+#
+# Autor: migbertweb
+#
+# Fecha: 2024-12-19
+#
+# Repositorio: https://github.com/migbertweb/bot_info_server
+#
+# Licencia: MIT License
+#
+# Uso: Ejecutado por el bot de Telegram mediante el comando /logs para mostrar
+# los últimos registros del sistema de forma remota.
+#
+# Nota: Este proyecto usa Licencia MIT. Se recomienda (no obliga) mantener 
+# derivados como código libre, especialmente para fines educativos.
+#
+
 set -e # Detener el script si hay un error
 
 # Definir ruta de logs (se almacenan en /logs dentro del contenedor)

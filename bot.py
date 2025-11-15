@@ -1,3 +1,25 @@
+"""
+Archivo: bot.py
+
+Descripción: Bot de Telegram para monitoreo remoto del sistema. Permite consultar
+el estado del sistema (CPU, memoria, disco, etc.) y visualizar logs a través de
+comandos de Telegram. Incluye autenticación por chat ID y ejecución segura de scripts.
+
+Autor: migbertweb
+
+Fecha: 2024-12-19
+
+Repositorio: https://github.com/migbertweb/bot_info_server
+
+Licencia: MIT License
+
+Uso: Bot principal que gestiona comandos de Telegram (/start, /status, /logs) y
+ejecuta scripts del sistema para obtener información de monitoreo.
+
+Nota: Este proyecto usa Licencia MIT. Se recomienda (no obliga) mantener 
+derivados como código libre, especialmente para fines educativos.
+"""
+
 import os
 import subprocess
 from dotenv import load_dotenv
@@ -18,6 +40,7 @@ if not TELEGRAM_TOKEN:
 
 
 # Decorador para verificar autorización
+# Solo permite que usuarios con el CHAT_ID autorizado ejecuten comandos
 def authorized_only(func):
     @wraps(func)
     async def wrapper(
@@ -31,7 +54,8 @@ def authorized_only(func):
     return wrapper
 
 
-# Funcón para ejecutar scripts con manejo de tiempo de espera
+# Función para ejecutar scripts con manejo de tiempo de espera
+# Ejecuta scripts bash de forma segura con timeout de 30 segundos
 def run_script(script_path):
     try:
         result = subprocess.run(
@@ -44,7 +68,7 @@ def run_script(script_path):
         return f"Error ejecutando el script: {e}"
 
 
-# Comando /start
+# Comando /start - Muestra mensaje de bienvenida y comandos disponibles
 @authorized_only
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     welcome_message = (
@@ -58,14 +82,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(welcome_message)
 
 
-# Comando /status
+# Comando /status - Ejecuta el script status.sh y muestra el estado del sistema
 @authorized_only
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     output = run_script("/scripts/status.sh")
     await update.message.reply_text(output)
 
 
-# Comando /logs
+# Comando /logs - Ejecuta el script logs.sh y muestra los últimos logs del sistema
+# Divide la salida en mensajes de máximo 2024 caracteres para evitar límites de Telegram
 @authorized_only
 async def logs(update: Update, context: ContextTypes.DEFAULT_TYPE):
     output = run_script("/scripts/logs.sh")
@@ -82,7 +107,7 @@ async def logs(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(message, parse_mode="Markdown")
 
 
-# Configuración del bot
+# Configuración del bot y punto de entrada principal
 if __name__ == "__main__":
     app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
     # Agregar manejadores de comandos

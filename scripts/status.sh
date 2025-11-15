@@ -1,4 +1,27 @@
 #!/bin/sh
+#
+# Archivo: status.sh
+#
+# Descripción: Script que recopila y muestra métricas del sistema incluyendo CPU,
+# memoria, disco, carga del sistema, uptime, usuarios conectados, tráfico de red,
+# temperatura de CPU, versión del kernel, procesos en ejecución y los 5 procesos
+# con mayor uso de CPU. Formatea la salida para su visualización en Telegram.
+#
+# Autor: migbertweb
+#
+# Fecha: 2024-12-19
+#
+# Repositorio: https://github.com/migbertweb/bot_info_server
+#
+# Licencia: MIT License
+#
+# Uso: Ejecutado por el bot de Telegram mediante el comando /status para mostrar
+# el estado actual del sistema de forma remota.
+#
+# Nota: Este proyecto usa Licencia MIT. Se recomienda (no obliga) mantener 
+# derivados como código libre, especialmente para fines educativos.
+#
+
 set -e # Detener el script si hay un error
 
 # Obtener métricas del sistema

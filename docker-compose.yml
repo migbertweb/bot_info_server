@@ -1,3 +1,26 @@
+#
+# Archivo: docker-compose.yml
+#
+# Descripción: Configuración de Docker Compose para el bot de Telegram de monitoreo.
+# Define el servicio del bot, configura las variables de entorno desde el archivo .env,
+# monta los volúmenes necesarios para logs y scripts, y establece la política de reinicio
+# automático del contenedor.
+#
+# Autor: migbertweb
+#
+# Fecha: 2024-12-19
+#
+# Repositorio: https://github.com/migbertweb/bot_info_server
+#
+# Licencia: MIT License
+#
+# Uso: Archivo de configuración para Docker Compose. Permite gestionar el contenedor
+# del bot de forma sencilla con comandos como docker-compose up, down, logs, etc.
+#
+# Nota: Este proyecto usa Licencia MIT. Se recomienda (no obliga) mantener 
+# derivados como código libre, especialmente para fines educativos.
+#
+
 ---
 services:
   gestionvps-bot:
